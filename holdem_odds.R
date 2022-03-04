@@ -26,7 +26,7 @@ holdem_odds = function(sims,shuffle){
 }
 
 tic()
-y = holdem_odds(10000,holdem_shuffle)
+y = holdem_odds(100,holdem_shuffle)
 print(y)
 toc()
 

@@ -63,32 +63,33 @@ cards_guessed_right_v2 = function(shuffle,sims){
   return(correc_vec/sims)
 }
 tic()
-cards_guessed_right_v2(better_shuffle,10000)
+cards_guessed_right_v2(better_shuffle,1000)
 toc()
 
 another_variation_distance_bar_plot = function(sims,shuffle1,shuffle2){
   holdem = cards_guessed_right_v2(shuffle1,sims)
   riffle = cards_guessed_right_v2(shuffle2,sims)
-  print(holdem)
-  print(riffle)
   
   data <- data.frame(values = c(holdem,riffle),
-                     subgroup = c("Casino Shuffle","7 riffles"))
+                     subgroup = c("Casino Shuffle","7 riffle shuffles"))
   
   ggplot(data,
          aes(x = reorder(subgroup,1:2),
              y = values,
-             fill = subgroup,
-             width = 0.5)) + 
+             fill = reorder(subgroup,1:2),
+             width = 0.5,
+             size = 5)) + 
     geom_bar(stat = "identity",
              position = "dodge")+
     labs(title="Number of cards guessed correctly after shuffling",
          x ="Shuffle type", y = "Cards guessed correctly",fill = NULL)+ 
     geom_hline(yintercept = 4.54,
                color="black", linetype="dashed")+
-    geom_text(aes(label = values), vjust = -0.2)+
-    theme(plot.title = element_text(hjust = .5),legend.position = "none")
+    geom_text(aes(label = round(values,2)), vjust = -0.2, size = 7)+
+    theme(plot.title = element_text(hjust = .5),
+          text = element_text(size=20),
+          legend.position = "none")
 }
 tic()
-another_variation_distance_bar_plot(10000,holdem_shuffle,better_shuffle)
+another_variation_distance_bar_plot(100000,holdem_shuffle,better_shuffle)
 toc()

@@ -40,7 +40,7 @@ card_neighbors_counts = function(sims,shuffle_type,cards){
 
 }
 
-card_neighbors_counts(1000,holdem_shuffle,52)
+card_neighbors_counts(10000,holdem_shuffle,52)
 
 #odds of the neighbor of a card being that close to the card after the shuffle
 #i.e. any card in the decks neighbor has about a 12.45 % chance of being it's neighbor
@@ -56,7 +56,9 @@ average_neighbor = function(sims,shuffle,cards){
   return(before_after_vals)
 }
 tic()
-x = average_neighbor(1000,holdem_shuffle,51)
+hold = average_neighbor(100000,holdem_shuffle,6)
+riffle = average_neighbor(100000,better_shuffle,6)
+alt5 = average_neighbor(100000,alt_shuffle5,6)
 toc()
 
 #MSE for values of neighbor cards ending x distance away from neighbor at
@@ -92,31 +94,24 @@ neighbor_ci = function(sims,shuffle,cards){
   
 }
 tic()
-neighbor_ci(1000,holdem_shuffle,6)
+neighbor_ci(100,holdem_shuffle,6)
 toc()
 
 
 neighbor_bar_chart = function(sims,shuffle1,shuffle2,cards){
-  holdem = neighbor_ci(sims,shuffle1,cards)
-  riffle = neighbor_ci(sims,shuffle2,cards)
+  holdem = hold
   nums = c()
-  ci_u = c()
-  ci_l = c()
   for (i in 1:cards){
-    nums = append(nums,unlist(holdem[[1]][i]))
-    nums = append(nums,unlist(riffle[[1]][i]))
-    #ci_u = append(ci_u,unlist(holdem[[2]][i]))
-    #ci_u = append(ci_u,unlist(riffle[[2]][i]))
-    #ci_l = append(ci_l,unlist(holdem[[3]][i]))
-    #ci_l = append(ci_l,unlist(riffle[[3]][i]))
+    nums = append(nums,unlist(holdem[i]))
+    nums = append(nums,unlist(riffle[i]))
+
   }
   
   data <- data.frame(values = nums,
                      group = rep(c(1:cards),
                                  each = 2),
-                     subgroup = c("Casino Shuffle","7 riffles"))
-                     #U = ci_u,
-                     #L = ci_l)
+                     subgroup = c("Casino Shuffle","7 riffle shuffles"))
+
   
   ggplot(data,
          aes(x = group,
@@ -126,12 +121,95 @@ neighbor_bar_chart = function(sims,shuffle1,shuffle2,cards){
              position = "dodge")+
     labs(title="Probability of neighbor cards being n cards apart",
          x ="Cards apart", y = "Probability",fill = "shuffle")+ 
-    #geom_errorbar(aes(ymax = U, ymin = L),width = .5, 
-                      #position=position_dodge(.9))+ 
     geom_abline(intercept = (100/51), slope = (-100/(52*51)),
                 color="black", linetype="dashed")+
-    theme(plot.title = element_text(hjust = .5))
+    geom_text(aes(label = round(values,2)), vjust = -0.2, size = 7, position = position_dodge(0.9))+
+    theme(plot.title = element_text(hjust = .5),
+          text = element_text(size=20))
 }
 tic()
-neighbor_bar_chart(10000,alt_shuffle,better_shuffle,51)
+neighbor_bar_chart(100,holdem_shuffle,better_shuffle,6)
 toc()
+
+
+neighbor_bar_chart3 = function(sims,shuffle1,shuffle2,shuffle3,cards){
+  holdem = hold
+  nums = c()
+  for (i in 1:cards){
+    nums = append(nums,unlist(holdem[i]))
+    nums = append(nums,unlist(alt5[i]))
+    nums = append(nums,unlist(riffle[i]))
+    
+  }
+  
+  data <- data.frame(values = nums,
+                     group = rep(c(1:cards),
+                                 each = 3),
+                     subgroup = c("Casino Shuffle","Alt shuffle","7 riffle shuffles"))
+  
+  
+  ggplot(data,
+         aes(x = group,
+             y = values, 
+             fill = reorder(subgroup,1:((cards)*3)))) + 
+    geom_bar(stat = "identity",
+             position = "dodge")+
+    labs(title="Probability of neighbor cards being n cards apart",
+         x ="Cards apart", y = "Probability",fill = "Shuffle")+ 
+    geom_abline(intercept = (100/51), slope = (-100/(52*51)),
+                color="black", linetype="dashed")+
+    geom_text(aes(label = round(values,2)), vjust = -0.2, 
+              size = 7, position = position_dodge(0.9))+
+    theme(plot.title = element_text(hjust = .5),
+          legend.title = element_text(size = 20),
+          legend.text = element_text(size = 15),
+          text = element_text(size=20))
+}
+tic()
+neighbor_bar_chart3(100,holdem_shuffle,better_shuffle,alt_shuffle,6)
+toc()
+
+
+
+
+alt = average_neighbor(100000,alt_shuffle,6)
+alt2 = average_neighbor(100000,alt_shuffle2,6)
+alt3 = average_neighbor(100000,alt_shuffle3,6)
+alt4 = average_neighbor(100000,alt_shuffle5,6)
+alt5 = average_neighbor(100000,alt_shuffle4,6)
+alt6 = average_neighbor(100000,alt_shuffle6,6)
+
+
+nums = c()
+for (i in 1:6){
+  nums = append(nums,unlist(alt[i]))
+  nums = append(nums,unlist(alt2[i]))
+  nums = append(nums,unlist(alt4[i]))
+  nums = append(nums,unlist(alt6[i]))
+  nums = append(nums,unlist(alt5[i]))
+  nums = append(nums,unlist(alt3[i]))
+}
+
+data <- data.frame(values = nums,
+                   group = rep(c(1:6),
+                               each = 6),
+                   subgroup = c("alt1","alt2","alt3","alt4","alt5","alt6"))
+
+
+ggplot(data,
+       aes(x = group,
+           y = values, 
+           fill = reorder(subgroup,1:36))) + 
+  geom_bar(stat = "identity",
+           position = "dodge")+
+  labs(title="Probability of neighbor cards being n cards apart",
+       x ="Cards apart", y = "Probability",fill = "shuffle")+ 
+  geom_abline(intercept = (100/51), slope = (-100/(52*51)),
+              color="black", linetype="dashed")+
+  theme(plot.title = element_text(hjust = .5),
+        legend.title = element_text(size = 20),
+        legend.text = element_text(size = 15),
+        text = element_text(size=20))
+
+
+

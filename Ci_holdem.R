@@ -181,27 +181,30 @@ ci_comparison_graph = function(sims,numpl,shuffle,name,shuffle2){
                        F =unlist(list_odds[i]),
                        L =CI_lowers*100,
                        U =CI_uppers*100,
-                       subgroup = c("holdem shuffle","Riffle shuffles"))
+                       subgroup = c("Casino shuffle"," 7 Riffle shuffles"))
     
     require(ggplot2)
-    p = ggplot(data, aes(x = reorder(group,1:((numpl+4)*2)), y = F,color = subgroup)) +
+    p = ggplot(data, aes(x = reorder(group,1:((numpl+4)*2)), y = F,
+                         color = reorder(subgroup,1:((numpl+4)*2)))) +
       geom_point(size = 1) +
       labs(title=name,
-           x =x_axis, y = "percentage",color = "shuffles")+ 
+           x =x_axis, y = "percentage",color = "Shuffle")+ 
       geom_errorbar(aes(ymax = U, ymin = L,width = .5,color = subgroup))+ 
       ylim(0,2.2*val[i])+
       geom_hline(yintercept=val[i], linetype="dashed", color = "black")+
-      theme(plot.title = element_text(hjust = .5))
+      theme(plot.title = element_text(hjust = .5),
+            legend.title = element_text(size = 20),
+            legend.text = element_text(size = 15))
     graphs[[i]] = p
   }
   ggarrange(graphs[[1]], graphs[[2]], graphs[[3]],graphs[[4]], graphs[[5]], 
             graphs[[6]],graphs[[7]], graphs[[8]], graphs[[9]],graphs[[10]],
-            ncol = 3, nrow = 4, common.legend = TRUE)
+            ncol = 2, nrow = 5, common.legend = TRUE)
   
 }
 
 tic()
-ci_comparison_graph(100000,6,holdem_shuffle,"holdem shuffle vs 7 riffles",better_shuffle)
+ci_comparison_graph(100000,6,holdem_shuffle,"Casino shuffle vs 7 Riffle shuffles",better_shuffle)
 toc()
 
 

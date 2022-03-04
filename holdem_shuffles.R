@@ -77,54 +77,7 @@ better_shuffle = function(deck){
   
 better_shuffle(1:52)
 
-alt_shuffle = function(deck){
-  shuffled_deck = many_riffle_shuffles(deck,3)
-  shuffled_deck = strip_shuffle(shuffled_deck)
-  shuffled_deck = many_riffle_shuffles(shuffled_deck,2)
-  shuffled_deck = deck_cut(shuffled_deck)
-  return(shuffled_deck)
-}
 
-alt_shuffle(1:52)
-
-alt_shuffle2 = function(deck){
-  shuffled_deck = many_riffle_shuffles(deck,2)
-  shuffled_deck = strip_shuffle(shuffled_deck)
-  shuffled_deck = many_riffle_shuffles(shuffled_deck,3)
-  shuffled_deck = deck_cut(shuffled_deck)
-  return(shuffled_deck)
-}
-
-alt_shuffle2(1:52)
-
-alt_shuffle3 = function(deck){
-  shuffled_deck = many_riffle_shuffles(deck,4)
-  shuffled_deck = strip_shuffle(shuffled_deck)
-  shuffled_deck = many_riffle_shuffles(shuffled_deck,1)
-  shuffled_deck = deck_cut(shuffled_deck)
-  return(shuffled_deck)
-}
-alt_shuffle4 = function(deck){
-  shuffled_deck = many_riffle_shuffles(deck,1)
-  shuffled_deck = strip_shuffle(shuffled_deck)
-  shuffled_deck = many_riffle_shuffles(shuffled_deck,4)
-  shuffled_deck = deck_cut(shuffled_deck)
-  return(shuffled_deck)
-}
-alt_shuffle5 = function(deck){
-  shuffled_deck = many_riffle_shuffles(deck,5)
-  shuffled_deck = strip_shuffle(shuffled_deck)
-
-  shuffled_deck = deck_cut(shuffled_deck)
-  return(shuffled_deck)
-}
-
-alt_shuffle6 = function(deck){
-  shuffled_deck = strip_shuffle(deck)
-  shuffled_deck = many_riffle_shuffles(shuffled_deck,5)
-  shuffled_deck = deck_cut(shuffled_deck)
-  return(shuffled_deck)
-}
 
 alt_shuf = function(deck){
   shuffled_deck = many_riffle_shuffles(deck,4)
@@ -135,15 +88,36 @@ alt_shuf = function(deck){
 }
 
 
-sevriffs = function(deck){
-  shuffled_deck = shuffle(deck)
-  for (x in 1:6){
-    shuffled_deck = shuffle(shuffled_deck)
-  }
+#CS
+holdem_shuffle()
+#2 riffle, strip, 2 riffle, cut
+ex_shuf1() = function(deck){
+  shuffled_deck = many_riffle_shuffles(deck,2)
+  shuffled_deck = strip_shuffle(shuffled_deck)
+  shuffled_deck = many_riffle_shuffles(shuffled_deck,2)
+  shuffled_deck = deck_cut(shuffled_deck)
   return(shuffled_deck)
 }
+#3 riffle, strip, 1 riffle, cut
+ex_shuf2() = function(deck){
+  shuffled_deck = many_riffle_shuffles(deck,3)
+  shuffled_deck = strip_shuffle(shuffled_deck)
+  shuffled_deck = many_riffle_shuffles(shuffled_deck,1)
+  shuffled_deck = deck_cut(shuffled_deck)
+  return(shuffled_deck)
+}
+#3 riffle, strip, 2 riffle, cut
+ex_shuf3() = function(deck){
+  shuffled_deck = many_riffle_shuffles(deck,3)
+  shuffled_deck = strip_shuffle(shuffled_deck)
+  shuffled_deck = many_riffle_shuffles(shuffled_deck,2)
+  shuffled_deck = deck_cut(shuffled_deck)
+  return(shuffled_deck)
+}
+#7 riffles
 
-print(sevriffs(1:52))
+
+
 
 
 

@@ -83,6 +83,6 @@ deal_holdem_odds = function(sims,numpl,shuffle_type){
   return(prob_of_card)
 }
 tic()
-deal_holdem_odds(10000,6,holdem_shuffle)
+deal_holdem_odds(1000,6,holdem_shuffle)
 toc()
 

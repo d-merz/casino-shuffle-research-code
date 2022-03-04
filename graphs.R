@@ -91,7 +91,7 @@ compare_mse_graph = function(sims,numpl,shuffle1,shuffle2){
                                    "river",
                                    "burn"),
                                  each = 2),
-                     subgroup = c("holdem shuffle","7 riffles"),
+                     subgroup = c("Casino shuffle","7 riffle shuffles"),
                      L =CI_lowers*100,
                      U =CI_uppers*100)
 
@@ -106,7 +106,7 @@ compare_mse_graph = function(sims,numpl,shuffle1,shuffle2){
     theme(plot.title = element_text(hjust = .5))
 }
 tic()
-compare_mse_graph(10000,6,holdem_shuffle,better_shuffle)
+compare_mse_graph(100000,6,holdem_shuffle,better_shuffle)
 toc()
 
 compare_sd_graph = function(sims,numpl,shuffle1,shuffle2){
@@ -148,7 +148,9 @@ toc()
 compare_holdem_histogram = function(sims,numpl,shuffle1,shuffle2){
   shuffle = deal_holdem_odds(sims,numpl,shuffle1)
   shuffle2 = deal_holdem_odds(sims,numpl,shuffle2)
-
+  print(shuffle)
+  print(shuffle2)
+  
   all_odds = list()
   all_odds2 = list()
   for (i in 1:numpl){
@@ -201,20 +203,23 @@ compare_holdem_histogram = function(sims,numpl,shuffle1,shuffle2){
   for (i in 1:(numpl+4)){
     
     df = data.frame(values = unlist(list_odds[i]),
-                    shuffle_type=factor(rep(c("Holdem Shuffle", "Riffle Shuffles"), each=52)))
+                    shuffle_type=factor(rep(c("Casino Shuffle", "Seven Riffle Shuffles"), each=52)))
     p= ggplot(df, aes(x=values,y=..density..,color = shuffle_type,fill = shuffle_type)) + 
       geom_histogram(bins = 20, position="identity",alpha = .5)+
       geom_vline(xintercept = val[i],color="blue", linetype="dashed")+
       geom_density(alpha=.5)+
       labs(title= group[i],
            x ="percentage")+
-      theme(plot.title = element_text(hjust = .5))
+      theme(plot.title = element_text(hjust = .5),
+            legend.title = element_text(size = 20),
+            legend.text = element_text(size = 15),
+            axis.title=element_text(size=12))
     
     graphs[[i]] = p
   }
   ggarrange(graphs[[1]], graphs[[2]], graphs[[3]],graphs[[4]], graphs[[5]], 
             graphs[[6]],graphs[[7]], graphs[[8]], graphs[[9]],graphs[[10]],
-            ncol = 3, nrow = 4,common.legend = TRUE)
+            ncol = 2, nrow = 5,common.legend = TRUE)
 }
 
 tic()

@@ -58,15 +58,15 @@ ggplot(data,
            fill = reorder(subgroup,1:24))) + 
   geom_bar(stat = "identity",
            position = "dodge")+
-  labs(title="Probability of neighbor cards being n cards apart: 3 total riffles",
-       x ="Cards apart", y = "Probability",fill = "shuffle")+ 
+  labs(title = "Probability of neighbor cards being n cards apart: 3 total riffles",
+       x = "Cards apart", y = "Probability",fill = "shuffle")+ 
   geom_abline(intercept = (100/51), slope = (-100/(52*51)),
-              color="black", linetype="dashed")+
+              color= "black", linetype= "dashed")+
   theme(
         plot.title = element_text(size = 20, hjust = .5),
         legend.title = element_text(size = 20),
         legend.text = element_text(size = 15),
-        text = element_text(size=20))+
+        text = element_text(size = 20))+
   scale_fill_brewer(palette= 1)
 
 
@@ -140,14 +140,14 @@ ggplot(data,
            fill = reorder(subgroup,1:30))) + 
   geom_bar(stat = "identity",
            position = "dodge")+
-  labs(title="Probability of neighbor cards being n cards apart: 4 total riffles",
-       x ="Cards apart", y = "Probability",fill = "shuffle")+ 
+  labs(title= "Probability of neighbor cards being n cards apart: 4 total riffles",
+       x = "Cards apart", y = "Probability",fill = "shuffle")+ 
   geom_abline(intercept = (100/51), slope = (-100/(52*51)),
-              color="black", linetype="dashed")+
+              color= "black", linetype= "dashed")+
   theme(plot.title = element_text(size = 20, hjust = .5),
         legend.title = element_text(size = 20),
         legend.text = element_text(size = 15),
-        text = element_text(size=20))+
+        text = element_text(size = 20))+
   scale_fill_brewer(palette = 2)
 
 
@@ -228,14 +228,14 @@ ggplot(data,
            fill = reorder(subgroup,1:36))) + 
   geom_bar(stat = "identity",
            position = "dodge")+
-  labs(title="Probability of neighbor cards being n cards apart: 5 total riffles",
-       x ="Cards apart", y = "Probability",fill = "shuffle")+ 
+  labs(title= "Probability of neighbor cards being n cards apart: 5 total riffles",
+       x = "Cards apart", y = "Probability",fill = "shuffle")+ 
   geom_abline(intercept = (100/51), slope = (-100/(52*51)),
-              color="black", linetype="dashed")+
+              color= "black", linetype= "dashed")+
   theme(plot.title = element_text(size = 20, hjust = .5),
         legend.title = element_text(size = 20),
         legend.text = element_text(size = 15),
-        text = element_text(size=20))+
+        text = element_text(size = 20))+
   scale_fill_brewer(palette = 3)
 
 
@@ -271,14 +271,14 @@ ggplot(data,
            fill = reorder(subgroup,1:30))) + 
   geom_bar(stat = "identity",
            position = "dodge",)+
-  labs(title="Probability of neighbor cards being n cards apart",
-       x ="Cards apart", y = "Probability",fill = "shuffle")+ 
+  labs(title= "Probability of neighbor cards being n cards apart",
+       x = "Cards apart", y = "Probability",fill = "shuffle")+ 
   geom_abline(intercept = (100/51), slope = (-100/(52*51)),
-              color="black", linetype="dashed")+
+              color= "black", linetype= "dashed")+
   theme(plot.title = element_text(size = 20, hjust = .5),
         legend.title = element_text(size = 20),
         legend.text = element_text(size = 15),
-        text = element_text(size=20))+
+        text = element_text(size = 20))+
   scale_fill_manual(values=c("#F8766D", "#6BAED6", "#2CA25F","#8856A7","#00BFC4"))
 
 

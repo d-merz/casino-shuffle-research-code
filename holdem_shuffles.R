@@ -30,24 +30,16 @@ rest_of_deck = function(deck,deck1){
   return(deck_2)
 }
 
-#strip shuffles a deck of cards
 strip_shuffle = function(deck){
-  deck_1 = deck_cut_at_prob(deck,1/4)
-  deck_2 = deck_cut_at_prob(rest_of_deck(deck,deck_1),(1/3))
-  deck_3 = deck_cut_at_prob(rest_of_deck(rest_of_deck(deck,deck_1),deck_2),(1/2))
-  deck_4 = rest_of_deck(rest_of_deck(rest_of_deck(deck,deck_1),deck_2),deck_3)
-  return(c(deck_4,deck_3,deck_2,deck_1))
-}
+    A = rbinom(n =1, size = length(deck), prob = 1/4)
+    B = rbinom(n =1, size = (length(deck)-A), prob = 1/3)
+    C = rbinom(n =1, size = (length(deck)-A-B), prob = 1/2)
+    D = length(deck) - C - B - A
+    strip = c(tail(deck,D),deck[(A+B+1):(A+B+C)],deck[(A+1):(A+B)],deck[1:A])
+    return(strip)
+  }
+  
 strip_shuffle(1:52)
-
-strip3 = function(deck){
-  deck_1 = deck_cut_at_prob(deck,1/3)
-  deck_2 = deck_cut_at_prob(rest_of_deck(deck,deck_1),(1/2))
-  deck_3 = rest_of_deck(rest_of_deck(deck,deck_1),deck_2)
-  return(c(deck_3,deck_2,deck_1))
-}
-
-print(strip3(1:52))
 
 #cuts a deck of cards
 deck_cut = function(deck){

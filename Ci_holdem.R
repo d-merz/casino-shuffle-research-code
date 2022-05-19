@@ -31,7 +31,7 @@ ci_graph = function(sims,numpl,shuffle,name){
   for(i in 1:(numpl+4)){
     if (i <= numpl){
       val = append(val,200/52)
-    }else if (i==numpl+1|i==numpl+4){
+    }else if (i == numpl+1|i == numpl+4){
       val = append(val,300/52)
     }else{
       val = append(val,100/52)
@@ -44,7 +44,7 @@ ci_graph = function(sims,numpl,shuffle,name){
   
   #iterating through each set of odds
   for (i in 1:(numpl+4)){
-    if(i<=numpl){
+    if(i <= numpl){
       x_axis <- paste("Player ", i, sep="")
     }else if(i == numpl+1){
       x_axis = "Flop"
@@ -74,11 +74,11 @@ ci_graph = function(sims,numpl,shuffle,name){
     require(ggplot2)
     p = ggplot(data, aes(x = group, y = F)) +
         geom_point(size = 1) +
-        labs(title=name,
-             x =x_axis, y = "Ci")+ 
+        labs(title= name,
+             x = x_axis, y = "Ci")+ 
         geom_errorbar(aes(ymax = U, ymin = L,width = .5))+ 
         ylim(0,2*val[i])+
-        geom_hline(yintercept=val[i], linetype="dashed", color = "red")+
+        geom_hline(yintercept = val[i], linetype = "dashed", color = "red")+
         theme(plot.title = element_text(hjust = .5))
     graphs[[i]] = p
     }
@@ -132,7 +132,7 @@ ci_comparison_graph = function(sims,numpl,shuffle,name,shuffle2){
   for(i in 1:(numpl+4)){
     if (i <= numpl){
       val = append(val,200/52)
-    }else if (i==numpl+1|i==numpl+4){
+    }else if (i == numpl+1|i == numpl+4){
       val = append(val,300/52)
     }else{
       val = append(val,100/52)
@@ -155,7 +155,7 @@ ci_comparison_graph = function(sims,numpl,shuffle,name,shuffle2){
 
   #iterating through each set of odds
   for (i in 1:(numpl+4)){
-    if(i<=numpl){
+    if(i <= numpl){
       x_axis <- paste("Player ", i, sep="")
     }else if(i == numpl+1){
       x_axis = "Flop"
@@ -178,20 +178,20 @@ ci_comparison_graph = function(sims,numpl,shuffle,name,shuffle2){
     }
 
     data <- data.frame(group = rep(c(cards1),each = 2),
-                       F =unlist(list_odds[i]),
-                       L =CI_lowers*100,
-                       U =CI_uppers*100,
+                       F = unlist(list_odds[i]),
+                       L = CI_lowers*100,
+                       U = CI_uppers*100,
                        subgroup = c("Casino shuffle"," 7 Riffle shuffles"))
     
     require(ggplot2)
     p = ggplot(data, aes(x = reorder(group,1:((numpl+4)*2)), y = F,
                          color = reorder(subgroup,1:((numpl+4)*2)))) +
       geom_point(size = 1) +
-      labs(title=name,
-           x =x_axis, y = "percentage",color = "Shuffle")+ 
+      labs(title = name,
+           x = x_axis, y = "percentage",color = "Shuffle")+ 
       geom_errorbar(aes(ymax = U, ymin = L,width = .5,color = subgroup))+ 
       ylim(0,2.2*val[i])+
-      geom_hline(yintercept=val[i], linetype="dashed", color = "black")+
+      geom_hline(yintercept = val[i], linetype = "dashed", color = "black")+
       theme(plot.title = element_text(hjust = .5),
             legend.title = element_text(size = 20),
             legend.text = element_text(size = 15))

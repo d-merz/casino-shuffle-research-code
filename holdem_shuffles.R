@@ -4,14 +4,14 @@
 #returns a deck cut at a certain probability
 deck_cut_at_prob = function(deck,cut_odds){
   z = cut_odds
-  cards_cut = rbinom(n =1, size = length(deck), prob = z)
+  cards_cut = rbinom(n = 1, size = length(deck), prob = z)
   
   if (cards_cut == length(deck)){
     return(deck)
   }
   deck_1 = c()
   for (x in 1:length(deck)){
-    if (x<= cards_cut){
+    if (x <= cards_cut){
       deck_1 = append(deck_1,deck[x]) 
     }
   }
@@ -31,9 +31,9 @@ rest_of_deck = function(deck,deck1){
 }
 
 strip_shuffle = function(deck){
-    A = rbinom(n =1, size = length(deck), prob = 1/4)
-    B = rbinom(n =1, size = (length(deck)-A), prob = 1/3)
-    C = rbinom(n =1, size = (length(deck)-A-B), prob = 1/2)
+    A = rbinom(n = 1, size = length(deck), prob = 1/4)
+    B = rbinom(n = 1, size = (length(deck)-A), prob = 1/3)
+    C = rbinom(n = 1, size = (length(deck)-A-B), prob = 1/2)
     D = length(deck) - C - B - A
     strip = c(tail(deck,D),deck[(A+B+1):(A+B+C)],deck[(A+1):(A+B)],deck[1:A])
     return(strip)
@@ -43,7 +43,7 @@ strip_shuffle(1:52)
 
 #cuts a deck of cards
 deck_cut = function(deck){
-  cut_pos = rbinom(n =1, size = length(deck), prob = 1/2)
+  cut_pos = rbinom(n = 1, size = length(deck), prob = 1/2)
   cut_deck = c(deck[(cut_pos+1):length(deck)],deck[1:cut_pos])
   return(cut_deck)
 }

@@ -31,7 +31,7 @@ deal_holdem_odds = function(sims,numpl,shuffle_type){
     for (hand in dealt_hand){
       z = z+1
 
-      if (length(hand)==2){
+      if (length(hand) == 2){
         card1 = hand[1]
         card2 = hand[2]
         prob_of_card[[z]][card1] = prob_of_card[[z]][card1] +1

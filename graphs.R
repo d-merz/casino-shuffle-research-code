@@ -30,7 +30,7 @@ holdem_histogram = function(sims,numpl,shuffle1){
   for(i in 1:(numpl+4)){
     if (i <= numpl){
       val = append(val,200/52)
-    }else if (i==numpl+1|i==numpl+4){
+    }else if (i == numpl+1|i == numpl+4){
       val = append(val,300/52)
     }else{
       val = append(val,100/52)
@@ -38,11 +38,11 @@ holdem_histogram = function(sims,numpl,shuffle1){
   for (i in 1:(numpl+4)){
 
     df = data.frame(values = unlist(all_odds[i]))
-    p= ggplot(df, aes(x=values,y=..density..)) + 
-       geom_histogram(color="black", fill="white",bins = 20)+
-       geom_vline(xintercept = val[i],color="blue", linetype="dashed")+
-       geom_density(alpha=.2,fill = "pink")+
-       labs(title= group[i],
+    p= ggplot(df, aes(x = values,y = ..density..)) + 
+       geom_histogram(color = "black", fill = "white", bins = 20)+
+       geom_vline(xintercept = val[i],color = "blue", linetype = "dashed")+
+       geom_density(alpha = .2,fill = "pink")+
+       labs(title = group[i],
            x ="odds")+
        theme(plot.title = element_text(hjust = .5))
     
@@ -92,17 +92,17 @@ compare_mse_graph = function(sims,numpl,shuffle1,shuffle2){
                                    "burn"),
                                  each = 2),
                      subgroup = c("Casino shuffle","7 riffle shuffles"),
-                     L =CI_lowers*100,
-                     U =CI_uppers*100)
+                     L = CI_lowers*100,
+                     U = CI_uppers*100)
 
   ggplot(data,
          aes(x = reorder(group,1:((numpl+4)*2)),
              y = values, fill = reorder(subgroup,1:((numpl+4)*2)))) + 
          geom_bar(stat = "identity",
                   position = "dodge")+
-        #geom_errorbar(aes(ymax = U, ymin = L,width = .2),position=position_dodge(.9))+
-        labs(title="MSE for players cards & board",
-             x ="Players cards + board", y = "MSE",fill = "shuffle")+ 
+        #geom_errorbar(aes(ymax = U, ymin = L,width = .2),position = position_dodge(.9)) +
+        labs(title = "MSE for players cards & board",
+             x = "Players cards + board", y = "MSE",fill = "shuffle")+ 
     theme(plot.title = element_text(hjust = .5))
 }
 tic()
@@ -134,8 +134,8 @@ compare_sd_graph = function(sims,numpl,shuffle1,shuffle2){
              y = values, fill = reorder(subgroup,1:((numpl+4)*2)))) + 
     geom_bar(stat = "identity",
              position = "dodge")+
-    labs(title="SD for players cards & board",
-         x ="Players cards + board", y = "Standard Deviations",fill = "shuffle")+ 
+    labs(title = "SD for players cards & board",
+         x = "Players cards + board", y = "Standard Deviations",fill = "shuffle")+ 
     theme(plot.title = element_text(hjust = .5))
 }
 tic()
@@ -195,7 +195,7 @@ compare_holdem_histogram = function(sims,numpl,shuffle1,shuffle2){
   for(i in 1:(numpl+4)){
     if (i <= numpl){
       val = append(val,200/52)
-    }else if (i==numpl+1|i==numpl+4){
+    }else if (i == numpl+1|i == numpl+4){
       val = append(val,300/52)
     }else{
       val = append(val,100/52)
@@ -203,13 +203,13 @@ compare_holdem_histogram = function(sims,numpl,shuffle1,shuffle2){
   for (i in 1:(numpl+4)){
     
     df = data.frame(values = unlist(list_odds[i]),
-                    shuffle_type=factor(rep(c("Casino Shuffle", "Seven Riffle Shuffles"), each=52)))
-    p= ggplot(df, aes(x=values,y=..density..,color = shuffle_type,fill = shuffle_type)) + 
-      geom_histogram(bins = 20, position="identity",alpha = .5)+
-      geom_vline(xintercept = val[i],color="blue", linetype="dashed")+
-      geom_density(alpha=.5)+
-      labs(title= group[i],
-           x ="percentage")+
+                    shuffle_type = factor(rep(c("Casino Shuffle", "Seven Riffle Shuffles"), each=52)))
+    p= ggplot(df, aes(x = values,y = ..density..,color = shuffle_type,fill = shuffle_type)) + 
+      geom_histogram(bins = 20, position = "identity", alpha = .5)+
+      geom_vline(xintercept = val[i],color = "blue", linetype = "dashed")+
+      geom_density(alpha = .5)+
+      labs(title = group[i],
+           x = "percentage")+
       theme(plot.title = element_text(hjust = .5),
             legend.title = element_text(size = 20),
             legend.text = element_text(size = 15),

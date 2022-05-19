@@ -9,8 +9,8 @@ cards_guessed_right_v2 = function(shuffle,sims){
     og = 1:52
     correct = 1
     cards = shuffle(1:52)
-    if (cards[1]==1){
-      correct = correct +1
+    if (cards[1] == 1){
+      correct = correct + 1
     }
     if(cards[1] == 52){
       top_card = cards[1]
@@ -36,7 +36,7 @@ cards_guessed_right_v2 = function(shuffle,sims){
       guess = z[[lrg]][1]
       og = og[-1*(match(top_card,og))]
 
-      if (cards[1]== guess){
+      if (cards[1] == guess){
         correct = correct +1
       }
       
@@ -47,7 +47,7 @@ cards_guessed_right_v2 = function(shuffle,sims){
             z[[i]] = NULL
           }else if(z[[i]][1] == top_card){
             z[[i]] = z[[i]][2:length(z[[i]])]
-          }else if(z[[i]][length(z[[i]])]==top_card){
+          }else if(z[[i]][length(z[[i]])] == top_card){
             z[[i]] = z[[i]][1:(length(z[[i]])-1)]
           }else{
             index = top_card - z[[i]][1]
@@ -81,10 +81,10 @@ another_variation_distance_bar_plot = function(sims,shuffle1,shuffle2){
              size = 5)) + 
     geom_bar(stat = "identity",
              position = "dodge")+
-    labs(title="Number of cards guessed correctly after shuffling",
-         x ="Shuffle type", y = "Cards guessed correctly",fill = NULL)+ 
+    labs(title= "Number of cards guessed correctly after shuffling",
+         x = "Shuffle type", y = "Cards guessed correctly",fill = NULL)+ 
     geom_hline(yintercept = 4.54,
-               color="black", linetype="dashed")+
+               color= "black", linetype= "dashed")+
     geom_text(aes(label = round(values,2)), vjust = -0.2, size = 7)+
     theme(plot.title = element_text(hjust = .5),
           text = element_text(size=20),

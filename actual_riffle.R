@@ -1,5 +1,5 @@
 riffle_shuffle = function(deck){
-  cut_point = rbinom(n =1, size = length(deck), prob = 1/2)
+  cut_point = rbinom(n = 1, size = length(deck), prob = 1/2)
   left = deck[1:cut_point]
   right = deck[(cut_point+1):length(deck)]
   riffled_deck = c()

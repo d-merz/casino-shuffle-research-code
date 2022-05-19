@@ -202,14 +202,14 @@ ggplot(data,
            fill = reorder(subgroup,1:36))) + 
   geom_bar(stat = "identity",
            position = "dodge")+
-  labs(title="Probability of neighbor cards being n cards apart",
-       x ="Cards apart", y = "Probability",fill = "shuffle")+ 
+  labs(title= "Probability of neighbor cards being n cards apart",
+       x = "Cards apart", y = "Probability",fill = "shuffle")+ 
   geom_abline(intercept = (100/51), slope = (-100/(52*51)),
-              color="black", linetype="dashed")+
+              color = "black", linetype = "dashed")+
   theme(plot.title = element_text(hjust = .5),
         legend.title = element_text(size = 20),
         legend.text = element_text(size = 15),
-        text = element_text(size=20))
+        text = element_text(size = 20))
 
 
 
